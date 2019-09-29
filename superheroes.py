@@ -47,6 +47,9 @@ class Hero:
         self.current_health = starting_health
         self.encore_chance = 0.2
         self.alive = True
+
+        self.kills = 0
+        self.deaths = 0
         
 
     def add_ability(self, ability):
@@ -57,35 +60,55 @@ class Hero:
         self.armors.append(armor)
 
 
-    def attack(self):
+    def attack_value(self):
         attack_total = 0
         for ability in self.abilities:
             attack_total += ability.attack()
         return attack_total
 
+    
+    def attack(self, enemy):
+        if enemy.receive_attack(self.attack_value()):
+            self.kills += 1
 
-    def defend(self):
+
+    def defence_value(self):
         defence_total = 0
         for armor in self.armors:
             defence_total += armor.defend()
         return defence_total
 
     
-    def take_damage(self, damage):
-        taken_damage = damage - self.defend()
+    def receive_attack(self, damage):
+        taken_damage = damage - self.defence_value()
         if taken_damage > 0:
             self.current_health -= taken_damage
+        return self.update_status()
         
 
     def update_status(self):
         if self.current_health <= 0:
             self.alive = False
             if self.is_villain:
-                print('NOOOOOOOOOOOO!')
-            elif random.value < self.encore_chance:
+                print('NOOOOOOoooooo....')
+                self.deaths += 1
+                return True
+            elif random.random < self.encore_chance:
                 print('NOT TODAY')
                 self.current_health = self.starting_health // 2
                 self.alive = True
+            else:
+                print('They got me...')
+                self.deaths += 1
+                return True
+        return False
+
+    
+    def resurrect(self):
+        self.current_health = self.starting_health
+        self.kills = 0
+        self.deaths = 0
+            
             
 
             
