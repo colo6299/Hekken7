@@ -68,7 +68,7 @@ def duel(hero_1, hero_2, to_the_death = False): # add no ABility tedsyrt
 
 
 def loops_brother():
-    
+    tdd = False
     roster = superheroes.hero_defaults()
 
     print('Please build Team 1...\n')
@@ -82,15 +82,22 @@ def loops_brother():
     print('Would you like all duels to be to the death? y/n')
     user_in = simplix.user_word('', ['y', 'n'])
     if user_in == 'y':
-        pass
+        tdd = True
     elif user_in == 'n':
-        pass
+        tdd = False
+
+    hero_1 = hero_1 = random.choice(team_1.heroes)
+    hero_2 = random.choice(team_2.heroes)
 
     fight_loop = True
     while fight_loop:
-        hero_1 = random.choice(team_1.heroes)
-        hero_2 = random.choice(team_2.heroes) 
-        duel(hero_1, hero_2)
+
+        while not hero_1.alive:
+            hero_1 = random.choice(team_1.heroes)
+        while not hero_2.alive:
+            hero_2 = random.choice(team_2.heroes)
+
+        duel(hero_1, hero_2, tdd)
 
         t1_dead = True
         for hero in team_1.heroes:
