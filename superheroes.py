@@ -62,10 +62,9 @@ class Hero:
 
 
     def attack_value(self):
-        attack_total = 0
-        for ability in self.abilities:
-            attack_total += ability.attack()
-        return attack_total
+        attack = random.choice(self.abilities)
+        print(self.name + ': ' + attack.name)
+        return attack.attack()
 
     
     def attack(self, enemy):
@@ -76,7 +75,7 @@ class Hero:
     def defence_value(self):
         defence_total = 0
         for armor in self.armors:
-            defence_total += armor.defend()
+            defence_total += armor.block()
         return defence_total
 
     
@@ -91,15 +90,15 @@ class Hero:
         if self.current_health <= 0:
             self.alive = False
             if self.is_villain:
-                print('NOOOOOOoooooo....')
+                print(self.name + ': NOOOOOOoooooo....')
                 self.deaths += 1
                 return True
-            elif random.random < self.encore_chance:
-                print('NOT TODAY')
+            elif random.random() < self.encore_chance:
+                print(self.name + ': NOT TODAY')
                 self.current_health = self.starting_health // 2
                 self.alive = True
             else:
-                print('They got me...')
+                print(self.name + ': They got me...')
                 self.deaths += 1
                 return True
         return False
@@ -109,38 +108,35 @@ class Hero:
         self.current_health = self.starting_health
         self.kills = 0
         self.deaths = 0
+        self.alive = True
             
 
 def hero_defaults():
     gink = Hero('Gink', 170)  # the legendary half-man, half-dog wrestling champ
-    gink.add_ability(
-        [
-            Ability('ROLLING DOG CRADLE', 9999),
-            Ability('YOU PRESSED A BUTTON', 50),
-            Ability('JAB', 10),
-            Ability('KICK', 15)
-        ]
-    )
-    gink.add_armor(
-        [
-            Armor('Go ask armor gink instead', 0)
-        ]
-    )
+    gink.abilities = [
+        Ability('ROLLING DOG CRADLE!!!', 9999),
+        Ability('FOOL! YOU PRESSED A BUTTON', 50),
+        Ability('Hey, a jab\'s a jab...', 10),
+        Ability('I\'LL STOMP YOUR FACE', 25)
+    ]
+
+    gink.armors = [
+        Armor('Go ask armor gink', 0)
+    ]
+
 
     glaudio = Hero('Glaudio', 170)  # The legendary italian farmer-turned-fighter
-    glaudio.add_ability(
-        [
-            Ability('SENTI IL MIO PODERE', 9999),
-            Ability('YOU CALL THAT A HOPKICK?', 50),
-            Ability('BACKHAND', 12),
-            Ability('I HAVE NEVER SEEN A LOW IN MY LIFE', 2)
-        ]
-    )
-    glaudio.add_armor(
-        [
-            Armor('You flinched.', 5)
-        ]
-    )
+    glaudio.abilities = [
+        Ability('SENTI IL MIO PODERE!!!', 9999),
+        Ability('You call THAT a hopkick?', 50),
+        Ability('Backhand!', 12),
+        Ability('I have never seen a low in my life.', 2)
+    ]
+
+    glaudio.armors =[
+        Armor('You flinched.', 5)
+    ]
+    
 
     return [gink, glaudio]
 

@@ -27,7 +27,10 @@ class Team:
 
     
     def report_stats(self):
-        print(f'Team {self.name} K/DR: {self.kills/self.deaths}')
+        if self.deaths == 0:
+            print(f'Team {self.name} K/DR: {self.kills/1}')
+        else:
+            print(f'Team {self.name} K/DR: {self.kills/self.deaths}')
                 
         
     def call_for_stats(self):
