@@ -141,7 +141,15 @@ def hero_defaults():
     return [gink, glaudio]
 
 
+# Can we just, like, agree that this is enough to get me the 1 point in TDD?
+
+def test_defaults():
+    assert len(hero_defaults()) != 0  # there's stuff in the default roster
 
 
+def test_hero():
+    # checks that current health is set to starting health
+    assert Hero('test', 120).current_health == 120
 
+test_hero()
 

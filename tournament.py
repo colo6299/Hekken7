@@ -60,9 +60,9 @@ def duel(hero_1, hero_2, to_the_death = False): # add no ABility tedsyrt
 
     if not hero_1.alive and not hero_2.alive:
         print("Both heroes have fallen!")
-    elif hero_1.alive:
+    elif not hero_2.alive:
         print(hero_1.name + ' has beaten ' + hero_2.name)
-    else:
+    elif not hero_1.alive:
         print(hero_2.name + ' has beaten ' + hero_1.name)
 
 
