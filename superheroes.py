@@ -1,5 +1,6 @@
 import random
 
+
 class Ability:
     def __init__(self, name, attack_strength):
         '''Create Instance Variables:
@@ -109,9 +110,42 @@ class Hero:
         self.kills = 0
         self.deaths = 0
             
-            
 
-            
+def hero_defaults():
+    gink = Hero('Gink', 170)  # the legendary half-man, half-dog wrestling champ
+    gink.add_ability(
+        [
+            Ability('ROLLING DOG CRADLE', 9999),
+            Ability('YOU PRESSED A BUTTON', 50),
+            Ability('JAB', 10),
+            Ability('KICK', 15)
+        ]
+    )
+    gink.add_armor(
+        [
+            Armor('Go ask armor gink instead', 0)
+        ]
+    )
+
+    glaudio = Hero('Glaudio', 170)  # The legendary italian farmer-turned-fighter
+    glaudio.add_ability(
+        [
+            Ability('SENTI IL MIO PODERE', 9999),
+            Ability('YOU CALL THAT A HOPKICK?', 50),
+            Ability('BACKHAND', 12),
+            Ability('I HAVE NEVER SEEN A LOW IN MY LIFE', 2)
+        ]
+    )
+    glaudio.add_armor(
+        [
+            Armor('You flinched.', 5)
+        ]
+    )
+
+    return [gink, glaudio]
+
+
+
 
 
 
