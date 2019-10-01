@@ -111,6 +111,32 @@ class Hero:
         self.alive = True
             
 
+class Sans(Hero):
+    def __init__(self, name, starting_health=170, is_villain = False):
+        self.counter = 0
+        super().__init__(name, starting_health)
+
+    def attack_value(self):
+        attack = self.abilities[self.counter % len(self.abilities)]
+        self.counter += 1
+        print(self.name + ': ' + attack.name)
+        return attack.attack()
+
+    def attack(self, enemy):
+        if self.attack_value() > 0:
+            self.erase(enemy)
+
+    def erase(self, enemy):
+        enemy.encore_chance = 0
+        enemy.current_health = 0
+        enemy.starting_health = 0
+        enemy.update_status()
+
+        # Dissapear forever.
+        enemy.alive = False
+        self.kills += 1  
+
+
 def hero_defaults():
     gink = Hero('Gink', 170)  # the legendary half-man, half-dog wrestling champ
     gink.abilities = [
@@ -136,9 +162,60 @@ def hero_defaults():
     glaudio.armors =[
         Armor('You flinched.', 5)
     ]
+
+
+    regulardog = Hero('regulardog', 50)  # The legendary ...dog?
+    regulardog.abilities = [
+        Ability('ARF', 99),
+        Ability('Woof!', 5),
+        Ability('arf', 1)
+    ]
+
+    regulardog.armors =[
+        Armor('fuzzzyyyyy :)', 5)
+    ]
+
+
+    superdog = Hero('SUPERDOG', 150)  # The legendary SUPERDOG
+    superdog.abilities = [
+        Ability('ARF', 9999),
+        Ability('Woof!', 50),
+        Ability('arf', 10)
+    ]
+
+    superdog.armors =[
+        Armor('fuzzzyyyyy :)', 50)
+    ]
+
+
+    sans = Sans('sans', 500)  # doot doot doooot doot 
+    sans.abilities = [
+        Ability('It\'s a beautiful day outside.', 0),
+        Ability('Birds are singing.', 0),
+        Ability('Flowers are blooming.', 0),
+        Ability('On days like these,', 0),
+        Ability('kids like you...', 0),
+        Ability('s h o u l d   b e   b u r n i n g   i n   h e l l.', 999999999999999999999999999999999999999999999999999999999999999999999999999999)
+    ]
+
+    sans.armors = [
+        Armor('Pathetic.', 9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999)
+    ]
+
+
+    regulardog = Hero('regulardog', 50)  # The legendary ...dog?
+    regulardog.abilities = [
+        Ability('ARF', 99),
+        Ability('Woof!', 5),
+        Ability('arf', 1)
+    ]
+
+    regulardog.armors =[
+        Armor('fuzzzyyyyy :)', 5)
+    ]
     
 
-    return [gink, glaudio]
+    return [gink, glaudio, regulardog, superdog, sans]
 
 
 # Can we just, like, agree that this is enough to get me the 1 point in TDD?
