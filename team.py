@@ -35,6 +35,8 @@ class Team:
         self.report_stats()
 
     
-    def resurrect(self):
+    def reset_team(self):
         for hero in self.heroes:
             hero.resurrect()
+        
+    

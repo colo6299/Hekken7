@@ -1,7 +1,5 @@
 import superheroes
-
-
-
+import team
 
 def duel(hero_1, hero_2): # add no ABility tedsyrt
 
@@ -17,3 +15,6 @@ def duel(hero_1, hero_2): # add no ABility tedsyrt
         print(hero_2.name + ' has beaten ' + hero_1.name)
 
 
+
+def form_team():
+    
