@@ -228,5 +228,5 @@ def test_hero():
     # checks that current health is set to starting health
     assert Hero('test', 120).current_health == 120
 
-test_hero()
+# test_hero()
 

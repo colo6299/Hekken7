@@ -130,5 +130,6 @@ def loops_brother():
 
         input('\nEnter to continue...\n')
 
-loops_brother()
+if __name__ == "__main__":
+    loops_brother()
 
